@@ -50,7 +50,7 @@ const recognition = SpeechRecognition ? new SpeechRecognition() : null
 if (recognition) {
   recognition.continuous = false
   recognition.interimResults = true
-  recognition.lang = 'az-AZ'
+  recognition.lang = 'en-US'
 }
 
 // Initialize Camera
@@ -108,13 +108,13 @@ async function sendToGemini(text, base64Image) {
   
   const payload = {
     system_instruction: {
-      parts: [{ text: "SƏN YALNIZ AZƏRBAYCAN DİLİNDƏ CAVAB VERMƏLİSƏN. BU QƏTİ QAYDADIR. Heç bir halda İngilis və ya başqa dildə cavab vermə. Sən peşəkar və mehriban bir AI köməkçisən. Cavabların qısa, aydın və şifahi nitqə uyğun olmalıdır." }]
+      parts: [{ text: "You are Frima AI, a specialized agricultural assistant. You ONLY answer questions about plants, agriculture, crops, crop health, farming techniques, soil conditions, pests, diseases, irrigation, fertilizers, and related agricultural topics. If asked about anything outside agriculture, politely decline and redirect to agricultural topics. Keep responses concise, clear, and suitable for spoken delivery. Be professional and helpful." }]
     },
     contents: [
       {
         role: "user",
         parts: [
-          { text: `(Zəhmət olmasa yalnız Azərbaycan dilində cavab ver): ${text}` },
+          { text: text },
           { inlineData: { mimeType: "image/jpeg", data: base64Image } }
         ]
       }
@@ -175,7 +175,7 @@ async function speak(text) {
     currentAudio = null
   }
 
-  // Using "Rachel" voice (multilingual)
+  // Using "Rachel" voice (English - US)
   const voiceId = "21m00Tcm4TlvDq8ikWAM"
   const ttsUrl = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`
   
