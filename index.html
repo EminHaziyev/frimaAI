@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>frima</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="live-container">
+      <!-- Header -->
+      <header class="live-header">
+        <div class="time">9:30</div>
+        <div class="app-title">
+          Gemini Vision
+        </div>
+        <div class="status-icons">
+          <i data-lucide="signal"></i>
+          <i data-lucide="battery"></i>
+        </div>
+      </header>
+
+      <!-- Video Feed -->
+      <main class="video-feed">
+        <video id="webcam" autoplay playsinline muted></video>
+        <div class="overlay">
+          <div class="message-bubble" id="status-message">
+            To interrupt Gemini, tap or start talking
+          </div>
+        </div>
+        <button class="refresh-btn">
+          <i data-lucide="refresh-cw"></i>
+        </button>
+      </main>
+
+      <!-- Controls -->
+      <footer class="live-controls">
+        <button class="ask-btn" id="ask-gemini">
+          <i data-lucide="mic"></i>
+          <span>Ask Gemini</span>
+        </button>
+
+        <div class="secondary-controls">
+          <button class="control-btn" id="toggle-video">
+            <i data-lucide="video"></i>
+          </button>
+          <button class="control-btn" id="reset-app">
+            <i data-lucide="refresh-cw"></i>
+          </button>
+        </div>
+      </footer>
+
+      </footer>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
