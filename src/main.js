@@ -366,6 +366,8 @@ resetBtn.addEventListener('click', () => {
   location.reload()
 })
 
+switchCameraBtn.addEventListener('click', switchCamera)
+
 // --- Dashboard Logic (Chart.js) ---
 
 const mockNDVIData = {
