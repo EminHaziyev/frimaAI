@@ -9,17 +9,158 @@
 </head>
 
 <body>
+  <div class="grain-overlay"></div>
   <div id="app">
-    <div class="live-container">
+    <!-- Dashboard View -->
+    <div id="dashboard-view" class="app-container">
+      <header>
+        <div class="header-content">
+          <div class="logo-section">
+            <div class="logo">🌱</div>
+            <div>
+              <h1>Green Karabakh</h1>
+              <div class="subtitle">Ağıllı Kənd Təsərrüfatı AI Platforması</div>
+            </div>
+          </div>
+          <div class="stats-bar">
+            <div class="stat-item">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Aktiv Sahələr</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">127</div>
+              <div class="stat-label">Analiz</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">94%</div>
+              <div class="stat-label">Dəqiqlik</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-grid">
+        <!-- Disease Detection Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span class="card-icon">📸</span>
+              Xəstəlik Aşkarlama
+            </h2>
+            <span class="badge badge-success">TFLite Model</span>
+          </div>
+
+          <div class="image-upload-zone"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 40px;">
+            <div class="upload-icon">📷</div>
+            <button id="start-scan-btn" class="start-scan-btn">
+              Start Live Scan
+            </button>
+            <p style="color: var(--text-secondary);">
+              Bitki xəstəliklərini real vaxtda analiz edin
+            </p>
+          </div>
+        </div>
+
+        <!-- NDVI Monitoring Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span class="card-icon">🛰️</span>
+              NDVI Monitorinq
+            </h2>
+            <span class="badge badge-warning">Sentinel-2</span>
+          </div>
+
+          <div class="field-selector">
+            <button class="field-btn active" id="field-1">Sahə 1 - Üzüm</button>
+            <button class="field-btn" id="field-2">Sahə 2 - Buğda</button>
+            <button class="field-btn" id="field-3">Sahə 3 - Pambıq</button>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="ndvi-chart"></canvas>
+          </div>
+
+          <div style="margin-top: 16px; padding: 16px; background: var(--bg-med); border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="color: var(--text-muted); font-size: 13px;">Son NDVI:</span>
+              <span style="color: var(--secondary); font-weight: 600; font-family: 'JetBrains Mono';">0.480</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted); font-size: 13px;">Dəyişiklik (7 gün):</span>
+              <span style="color: var(--danger); font-weight: 600;">↓ 24.0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Risk Analysis Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span class="card-icon">⚠️</span>
+              Risk Analizi
+            </h2>
+            <span class="badge badge-danger">Yüksək</span>
+          </div>
+
+          <div class="risk-score">
+            <div class="risk-circle high">
+              <div class="risk-number" style="color: #C1392B;">72</div>
+              <div class="risk-label" style="color: #C1392B;">Yüksək Risk</div>
+            </div>
+          </div>
+
+          <div class="factors-list">
+            <h4 style="margin-bottom: 12px; color: var(--text-primary); font-size: 15px;">Risk Faktorları:</h4>
+            <div class="factor-item negative">
+              <span style="font-size: 14px;">📉 NDVI azalması (33%)</span>
+              <span style="color: var(--danger); font-weight: 600;">+25</span>
+            </div>
+            <div class="factor-item negative">
+              <span style="font-size: 14px;">🌧️ 7 günlük yağış defisiti</span>
+              <span style="color: var(--danger); font-weight: 600;">+20</span>
+            </div>
+            <div class="factor-item positive">
+              <span style="font-size: 14px;">💧 Torpaq rütubəti normal</span>
+              <span style="color: var(--success); font-weight: 600;">-8</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Recordings Card -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span class="card-icon">📹</span>
+              Son Çəkilişlər
+            </h2>
+            <span class="badge badge-success">Arxiv</span>
+          </div>
+          <div id="recordings-list"
+            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;">
+            <!-- Recordings will be injected here -->
+            <p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 20px;">Hələ heç bir
+              çəkiliş yoxdur.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>🇦🇿 Green Karabakh Platform • Karabakh Hackathon 2025</p>
+        <p style="margin-top: 8px; opacity: 0.6;">Powered by TensorFlow Lite • Sentinel-2 • Open-Meteo API</p>
+      </div>
+    </div>
+
+    <!-- Vision View (Hidden by default) -->
+    <div id="vision-view" class="live-container hidden">
       <!-- Header -->
       <header class="live-header">
-        <div class="time">9:30</div>
+        <button class="back-btn" id="back-to-dashboard">
+          <i data-lucide="arrow-left"></i>
+        </button>
         <div class="app-title">
-          Gemini Vision
-        </div>
-        <div class="status-icons">
-          <i data-lucide="signal"></i>
-          <i data-lucide="battery"></i>
+          Firma AI Vision
         </div>
       </header>
 
@@ -31,29 +172,39 @@
             To interrupt Gemini, tap or start talking
           </div>
         </div>
-        <button class="refresh-btn">
+        <button class="refresh-btn" id="switch-camera">
           <i data-lucide="refresh-cw"></i>
         </button>
       </main>
 
       <!-- Controls -->
       <footer class="live-controls">
-        <button class="ask-btn" id="ask-gemini">
-          <i data-lucide="mic"></i>
-          <span>Ask Gemini</span>
-        </button>
+
 
         <div class="secondary-controls">
           <button class="control-btn" id="toggle-video">
             <i data-lucide="video"></i>
+          </button>
+          <button class="control-btn hold" id="hold-call">
+            <i data-lucide="phone-off"></i>
           </button>
           <button class="control-btn" id="reset-app">
             <i data-lucide="refresh-cw"></i>
           </button>
         </div>
       </footer>
+    </div>
 
-      </footer>
+    <!-- Video Playback Modal -->
+    <div id="video-modal" class="hidden"
+      style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <button id="close-modal-btn"
+        style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer;">
+        <i data-lucide="x"></i>
+      </button>
+      <video id="playback-video" controls
+        style="max-width: 90%; max-height: 80vh; border-radius: 12px; box-shadow: 0 0 50px rgba(0,0,0,0.5);"></video>
+      <div id="video-date" style="color: white; margin-top: 16px; font-size: 18px;"></div>
     </div>
   </div>
   <script type="module" src="/src/main.js"></script>
